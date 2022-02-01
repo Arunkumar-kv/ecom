@@ -1,0 +1,41 @@
+body{
+    background-color: #000000;
+}
+.container{
+    margin-top:110px !important;
+}
+.card{
+    border: none;
+    outline: none;
+    background-color: #f8f9fa;
+    border-radius: 20px;
+}
+.card:hover{
+    transform: translate(-15px);
+    transition: transform .3s;
+}
+.card-text{
+    font-size: 13px;
+    color: white;
+}
+.card-body{
+    line-height: 17px;
+}
+.card-price{
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+}
+.item{
+    color: deeppink;
+
+}
+.item:hover{
+    opacity: .8;
+
+}
+.cursor{
+    cursor: pointer;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}

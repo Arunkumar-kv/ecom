@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" >
+
+{% block metadesp %}
+    {% if cat %}
+        {{ cat.description|truncatewords:115}
+    {% else %}
+     WELCOME TO OUR FASHON WORLD
+    {% endif %}
+{% endblock %}
+-------------------------------------------------------------
+{% block title %}
+    {% if cat %}
+        {{ cat.name }}- FASHON STORE
+    {% else %}
+        SEE OUR NEW- FASHON STORE
+    {% endif %}
+{% endblock %}
+{#---------------------------------------------------------------#}
+
+{% block body %}
+
+    <div class="container mb-5 mt-5">
+<div class="row">
+{% for i in item %}
+
+    <div class="col-md-4">
+<div class="card mt-3" style="width: 18rem;">
+  <img class="card-img-top rounded " width="160" src="{{ i.image.url }}" alt="{{ i.name }}">
+  <div class="card-body mt-3">
+    <h5 class="card-title d-block">{{ i.name }}</h5>
+      <span class="card-price mt-3 text-dark">{{ i.price }}</span>
+      <div class="item p-3 text-center text-white mt-3 cursor">
+    <a href="{{ i.get_absloute_url }}" class="btn text-uppercase">Go TO View</a>
+  </div>
+</div>
+</div></div>
+{% endfor %}
+
+
+</div></div>
+
+{% endblock %}

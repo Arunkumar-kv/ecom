@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" >
+
+{% block metadesp %}
+    {% if cat %}
+        {{ cat.description|truncatewords:115}
+    {% else %}
+     WELCOME TO OUR FASHON WORLD
+    {% endif %}
+{% endblock %}
+-------------------------------------------------------------
+{% block title %}
+    {% if cat %}
+        {{ cat.name }}- FASHON STORE
+    {% else %}
+        SEE OUR NEW- FASHON STORE
+    {% endif %}
+{% endblock %}
+{#---------------------------------------------------------------#}
+
+{% block body %}
+
+    <div class="container mb-5 mt-5">
+<div class="row">
+
+
+    <div class="col-md-12">
+<div class="card mt-6" style="width: 18rem;">
+  <img class="card-img-top rounded " width="160" src="{{ pr.image.url }}" alt="{{ pr.name }}">
+  <div class="card-body mt-6">
+    <h5 class="card-title d-block">{{ pr.name }}</h5>
+       <p class="card-text">{{ pr.decription }}.</p>
+      <span class="card-price mt-3 text-dark">{{ pr.price }}</span>
+      {% if pr.stock <= 0 %}
+
+         <p>OUT OF STOCK.</p>
+          <a href="{% url 'shop:allproduct' %}" class="btn text-uppercase">BACK</a>
+
+      {% else %}
+      <div class="item p-6 text-center text-white mt-3 cursor">
+    <a href="{% url 'store:add_cart' pr.id %}" class="btn text-uppercase">add to cart</a>
+
+      {% endif %}
+  </div>
+</div>
+</div></div>
+
+
+</div></div>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="box-element">
+            <a class="btn btn-outline-dark" href="{% url 'shop:allproduct' %}">continue shopping</a>
+            <br><br>
+            <table class="table">
+                <tr>
+                    <th><h5>ITEMS:<strong> {{ cart.get_cart_quantity }}</strong></h5> </th>
+                    <th><h5>TOTAL:<strong> ${{ cart.get_cart_total }}</strong></h5> </th>
+
+                    <th><a style="float: right;margin: 5px" class="btn btn-success" href="{% url 'checkout:checkout' %}">CHECKOUT</a> </th>
+                </tr>
+            </table>
+
+    </div>
+</div>
+    <table>
+        <tr>
+        <br>
+        <div class="box-element">
+
+            <div class="col-lg-12">
+
+
+            <div class="cart-row"><table>
+{% for i in cartitem %}
+    <th><div style="flex:2 "><img src="{{ i.product.image.url }}" alt=" {{ i.product.name }}"></img></div></th>
+               <th> <div style="flex:2"><strong>{{ i.product.name }}</strong></div></th>
+    <th><div style="flex:2"><strong>{{ i.product.subtotal }}</strong></div></th>
+
+                <th><div style="flex:2"><strong>{{ i.quantity }}</strong></div></th>
+
+                            {% if i.quantity < i.product.stock %}
+                        <td>
+                        &nbsp;<a  href="{% url 'store:add_cart'  i.product.id %}" class="plus-minus"> <i class="fas fa-plus"> </i> </a>
+
+                           &nbsp; <a  href="{{ i.get_u }}" class="plus-minus" ><i class="fas fa-minus"></i></a>
+                           &nbsp; <a  href="{{ i.get_del }}" class="plus-minus" ><i class="fas fa-trash"></i></a>
+
+
+                        </td>
+                                                          {% else %}
+                      <td>
+
+
+                           &nbsp; <a  href="{{ i.get_u }}" class="plus-minus" ><i class="fas fa-minus"></i></a>
+                           &nbsp; <a  href="{{ i.get_del }}" class="plus-minus" ><i class="fas fa-trash"></i></a>
+
+
+                        </td>
+                        {% endif %}
+
+                <th><div style="flex:2"><strong>{{ i.get_subtotal }}</strong></div></table></th><hr>{% endfor %}
+
+            </div>
+
+            </div>
+</tr></table><hr></div>
+{% endblock %}

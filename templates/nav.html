@@ -1,0 +1,61 @@
+{#<nav>#}
+{#    <ul>#}
+{#        <li><a href="{% url 'kart:products' %}">all product</a> </li>#}
+{#        {% for li in links %}<li>  <a href="{{ li.get_url }}">{{li.name}}</a></li>#}
+{#        {% endfor %}#}
+{#        <li>your product</li>#}
+{#    </ul>#}{% load static %}
+{#</nav>#}
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" >
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">FASHION </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'shop:allproduct' %}">Home</a>
+        </li>
+
+        <li class="nav-item dropdown {% if 'shop' in request.path %} active {% endif %}">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            CATE
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+{% for li in links %}
+
+
+            <li><a class="dropdown-item" href="{{ li.get_url }}">{{ li.name }}</a></li>
+
+{% endfor %}
+          </ul>
+  </li>
+      </ul>
+      <form class="d-flex" action="#" method="get">
+          {% csrf_token %}
+        <input class="form-control me-2 " type="search" placeholder="Search"  name="q" id="q" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+      </form>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+{#                                    {% if user.is_authenticated %}#}
+{#                                    <li>hai {{user.username  }}</li>#}
+{##}
+{#                                    <a href="{% url 'shop:logout' %}" class="search_input search_input_2 glyphicon-text-color">SIGN OUT</a>#}
+{#                                    {% else %}#}
+{#                                    <a href="{% url 'shop:signup' %}" class="search_input search_input_2 glyphicon-text-color"> SIGNUP</a>#}
+{#                                    <a href="{% url 'shop:login' %}" class="search_input search_input_2 glyphicon-text-color">SIGN IN</a>#}
+{#                                    {% endif %}#}
+        </li>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <li class="nav-item">
+               {% for i in link %}
+          <a class="nav-link" href="{% url 'store:cart' %}"><i class="fas fa-shopping-cart"> {{ i.get_cart_quantity }}</i></a>
+               {% endfor %}
+        </li>
+    </div>
+
+  </div>
+</nav>
